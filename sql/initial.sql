@@ -1,4 +1,4 @@
-CREATE TABLE user(
+CREATE TABLE `user`(
     id INTEGER AUTO_INCREMENT,
     user_name  VARCHAR(20) NOT NULL,
     password VARCHAR(40) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE status(
     id INTEGER AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
     body VARCHAR(255),
-    created_at DATETINE,
+    created_at DATETIME,
     PRIMARY KEY(id),
     INDEX user_id_index(user_id)
 )ENGINE = INNODB;
