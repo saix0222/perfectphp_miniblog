@@ -6,6 +6,7 @@ abstract class Application
     protected $response;
     protected $session;
     protected $db_manager;
+    protected $router;
     protected $login_action = array();
 
     public function __construct($debug = false)
@@ -97,9 +98,19 @@ abstract class Application
             if($params === false){
                 throw new HttpNotFoundException('No route found for '. $this->request->getPathInfo());
             }
-                
-            $controller = $params['controller'];
-            $action = $params['action'];
+            
+            $controller = '';
+            if(isset($params['controller'])){
+                $controller = $params['controller'];
+            }
+            $action = '';
+            if(isset($params['action'])){
+                $action = $params['action'];
+            }
+
+            if(!$controller && !$action){
+                throw new HttpNotFoundException('No route found for '. $this->request->getPathInfo());
+            }
                 
             $this->runAction($controller, $action, $params);
         } catch (HttpNotFoundException $e){
