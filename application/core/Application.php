@@ -134,13 +134,13 @@ EOF
         );
     }
 
-    public function runAction($controller_name, $action $params = array())
+    public function runAction($controller_name, $action, $params = array())
     {
         $controller_class = ucfirst($controller_name). 'Controller';
 
         $controller = $this->findController($controller_class);
         if($controller === false){
-            throw new HttpNotFoundException($controller_class. 'controller is not found.')
+            throw new HttpNotFoundException($controller_class. 'controller is not found.');
         }
 
         $content = $controller->run($action, $params);

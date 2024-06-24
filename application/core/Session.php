@@ -47,7 +47,7 @@ class Session
         self::$sessionIdReegenerated = true;
     }
 
-    public fuction setAuthenticated($bool)
+    public function setAuthenticated($bool)
     {
         $this->set('_authenticated', (bool)$bool);
 

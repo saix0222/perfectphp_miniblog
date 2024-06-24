@@ -23,7 +23,7 @@ class Request
     public function getPost($name, $default = null)
     {
         if(isset($_POST[$name])){
-            return $_POST[$name]
+            return $_POST[$name];
         }
 
         return $default;
@@ -41,7 +41,7 @@ class Request
     public function isSssl()
     {
         if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'){
-            retunr true;
+            return true;
         }
 
         return false;
@@ -70,7 +70,7 @@ class Request
     public function getPathInfo()
     {
         $base_url = $this->getBaseUrl();
-        $requesturi = $this->getRequestUri();
+        $request_uri = $this->getRequestUri();
 
         if(false !== ($pos = strpos($request_uri, '?'))){
             $request_uri = substr($request_uri,0,$pos);

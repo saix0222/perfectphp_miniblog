@@ -31,7 +31,7 @@ abstract class controller
             $this->foward404();
         }
 
-        if($this->needsAuthentication($action)) && !$this->session->isAuthenticated())
+        if($this->needsAuthentication($action) && !$this->session->isAuthenticated())
         {
             throw new UnauthorizedActionException();
         }

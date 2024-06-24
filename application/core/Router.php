@@ -6,15 +6,15 @@ class Router
 
     public function __construct($definitions)
     {
-        $this->routes = $his->compileRoutes($definitions);
+        $this->routes = $this->compileRoutes($definitions);
     }
 
     public function compileRoutes($definitions)
     {
         $routes = array();
 
-        foreach ($definitions as $url => params){
-            $tokens = explode('/' ltrim($url, '/'));
+        foreach ($definitions as $url => $params){
+            $tokens = explode('/', ltrim($url, '/'));
             foreach($tokens as $i => $token){
                 if(0 === strpos($token, ':')){
                     $name = substr($token, 1);
