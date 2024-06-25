@@ -60,7 +60,7 @@ class Request
 
         if(0 === strpos($request_url,$script_name)){
             return $script_name;
-        }else if (0 ===strpos($request_uri, dirname($script_name))){
+        }else if (0 ===strpos($request_url, dirname($script_name))){
             return rtrim(dirname($script_name), '/');
         }
 

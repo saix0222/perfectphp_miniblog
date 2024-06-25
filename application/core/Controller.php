@@ -1,6 +1,6 @@
 <?php
 
-abstract class controller
+abstract class Controller
 {
     protected $controller_name;
     protected $action_name;
@@ -13,11 +13,11 @@ abstract class controller
 
     public function __construct($application)
     {
-        $this->controller_name = strtolower(sbstr(get_class($this), 0, -10));
+        $this->controller_name = strtolower(substr(get_class($this), 0, -10));
 
         $this->application  = $application;
         $this->request      = $application->getRequest();
-        $this->reseponse    = $application->getResponse();
+        $this->response    = $application->getResponse();
         $this->session      = $application->getSession();
         $this->db_manager   = $application->getDbManager();
     }
@@ -27,8 +27,8 @@ abstract class controller
         $this->action_name = $action;
 
         $action_method = $action . 'Action';
-        if(!$method_exists($this, $action_method)){
-            $this->foward404();
+        if(!method_exists($this, $action_method)){
+            $this->forward404();
         }
 
         if($this->needsAuthentication($action) && !$this->session->isAuthenticated())
