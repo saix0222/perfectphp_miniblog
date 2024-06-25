@@ -43,7 +43,7 @@ abstract class Controller
 
     protected function needsAuthentication($action)
     {
-        if($this->auth_acdtions ===  true || (is_array($this->auth_actions) && in_array($action, $this->auth_actions))
+        if($this->auth_actions ===  true || (is_array($this->auth_actions) && in_array($action, $this->auth_actions))
         ){
             return true;
         }
@@ -59,14 +59,16 @@ abstract class Controller
             'session'   => $this->session,
         );
 
+        $defaults = array();
         $view = new View($this->application->getViewDir(), $defaults);
 
         if(is_null($template)){
             $template = $this->action_name;
         }
 
-        $path = $this->controller_name . '/' . $tmplate;
+        $path = $this->controller_name . '/' . $template;
 
+        $variables = array();
         return $view->render($path, $variables, $layout);
     }
 

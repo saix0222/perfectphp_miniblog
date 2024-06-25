@@ -21,7 +21,7 @@ class View
     {
         $_file = $this->base_dir . '/' . $_path . '.php';
 
-        extract(array_merge($this->defaults, $_valuables));
+        extract(array_merge($this->defaults, $_variables));
 
         ob_start();
         ob_implicit_flush(0);
