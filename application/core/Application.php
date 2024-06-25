@@ -78,7 +78,7 @@ abstract class Application
 
     public function getViewDir()
     {
-        return $this->getRootDir() . '/controllers';
+        return $this->getRootDir() . '/views';
     }
 
     public function getModelDir()
