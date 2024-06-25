@@ -41,7 +41,7 @@ class DBManager
         $this->repositoyry_connection_map[$repository_name] = $name;
     }
 
-    public function getConnectForRepository($repository_name)
+    public function getConnectionForRepository($repository_name)
     {
         if (isset($this->repository_connection_map[$repository_name])){
             $name = $this->repository_connection_map[$repository_name];

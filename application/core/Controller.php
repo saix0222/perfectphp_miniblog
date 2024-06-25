@@ -51,15 +51,14 @@ abstract class Controller
         return false;
     }
 
-    protected function render($valuables = array(), $template = null, $layout = 'layout')
+    protected function render($variables = array(), $template = null, $layout = 'layout')
     {
-        $default = array(
+        $defaults = array(
             'request'   => $this->request,
             'base_url'  => $this->request->getBaseUrl(),
             'session'   => $this->session,
         );
 
-        $defaults = array();
         $view = new View($this->application->getViewDir(), $defaults);
 
         if(is_null($template)){
@@ -68,7 +67,6 @@ abstract class Controller
 
         $path = $this->controller_name . '/' . $template;
 
-        $variables = array();
         return $view->render($path, $variables, $layout);
     }
 
