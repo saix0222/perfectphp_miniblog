@@ -11,6 +11,7 @@ class AccountController extends controller
 
     public function registerAction()
     {
+        //このメソッドもう少しカプセル化できそう
         if (!$this->request->isPost()){
             $this->forward404();
         }
@@ -25,6 +26,7 @@ class AccountController extends controller
 
         $errors = array();
 
+        //バリデーション処理のテストコード書きたい
         if(!strlen($user_name)){
             $errors[] = 'ユーザIDを入力してください';
         } else if (!preg_match('/^w{3,20}$/', $user_name)){
@@ -41,6 +43,19 @@ class AccountController extends controller
 
         if(count($errors) === 0){
             $this->db_manager->get('User')->insert($user_name, $password);
+            $this->session->setAuthenticated(true);
+
+            $user = $this->db_manager->get('User')->fetchByUserName($user_name);
+            $this->session->set('user', $user);
+
+            return $this->redirect('/');
         }
+
+        return $this->render(array(
+            'user_name' => $user_name,
+            'password'  => $password,
+            'errors'    => $errors,
+            '_token'    => $this->generateCsrfToken('account/signup'),
+        ), 'signup');
     }
 }
