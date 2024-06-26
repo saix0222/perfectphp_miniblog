@@ -21,22 +21,23 @@ class UserRepository extends DbRepository
 
     public function hashPassword($password)
     {
+        //後半の文字列はシステムごとに変える
         return sha1($password . 'WLF6Ne2TWxxNzLJejUBe');
     }
 
     public function fetchByUserName($user_name)
     {
-        $sql = "SELECT * FROM user WHERE user_name = :user_name";
+        $sql = "SELECT * FROM `user` WHERE user_name = :user_name";
 
         return $this->fetch($sql, array(':user_name' => $user_name));
     }
 
     public function isUniqueUserName($user_name)
     {
-        $sql = "SELET COUNT(id) as count FROM user WHERE user_name = :user_name";
+        $sql = "SELECT COUNT(id) as count FROM user WHERE user_name = :user_name";
 
         $row = $this->fetch($sql, array(':user_name' => $user_name));
-        if($row['count'] === '0'){
+        if($row['count'] === 0){
             return true;
         }
 
