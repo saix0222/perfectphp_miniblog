@@ -5,8 +5,11 @@ class StatusController extends Controller
     public function indexAction()
     {
         $user = $this->session->get('user');
-        $statuses = $this->db_manager->get('Status')
-            ->fetchAllPersonalArchivesByUserId($user['id']);
+        $statuses = array();
+        if(isset($user['id'])){
+            $statuses = $this->db_manager->get('Status')
+                ->fetchAllPersonalArchivesByUserId($user['id']);
+        }
 
         return $this->render(array(
             'statuses'  => $statuses,
@@ -38,7 +41,9 @@ class StatusController extends Controller
 
         if(count($errors) === 0){
             $user = $this->session->get('user');
-            $this->db_manager->get('Status')->insert($user['id'], $body);
+            if(isset($user['id'])){
+                $this->db_manager->get('Status')->insert($user['id'], $body);
+            }
 
             return $this->redirect('/');
         }
